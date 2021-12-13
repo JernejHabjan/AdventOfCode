@@ -38,64 +38,40 @@ def validate(board):
     return False
 
 
-def getSumUnmarked(board):
-    sumUnmarked = 0
-
-    for line in board:
-        for nr in line:
-            if nr is not None:
-                sumUnmarked += int(nr)
-    return sumUnmarked
-
-
-def validateAll(nr, totalWinners):
+def getWinner(allBoards):
     winner = 0
-    winningBoard = None
-    for board in boards:
-        if validate(board):
-            winner = int(nr)
-            winningBoard = board
-            totalWinners += 1
-            # print("winner", board, "nr", nr)
-            break
-    return winner, winningBoard, totalWinners
-
-
-def bb():
-    totalWinners = 0
-    winner = 0
-    winningBoard1 = None
-    winningBoard = None
-    nr1 = None
+    winning_board = None
     for nr in nrInput:
-        # print("nr unmarked1", nr)
-        if totalWinners == len(boards):
+        # print("next nr", nr)
+        if winner != 0:
             break
         for i in range(0, len(boards)):
-            # print(getSumUnmarked(boards[i]))
             for j in range(0, len(boards[i])):
                 for k in range(0, len(boards[i][j])):
                     if boards[i][j][k] == nr:
                         boards[i][j][k] = None
-                        # print("nr unmarked2", nr)
-
-                        # winner1, winningBoard1, totalWinners1 = validateAll(nr, totalWinners)
-                        # if (totalWinners1 == len(boards)):
-                        #     print("OK", nr)
-
-        winner, winningBoard, totalWinners = validateAll(nr, totalWinners)
-        # print("total winners", totalWinners, winningBoard)
-
-        if (winningBoard in boards):
-            winningBoard1 = winningBoard.copy()
-            # print("OK IN", boards.index(winningBoard))
-            del boards[boards.index(winningBoard)]
-            nr1 = nr
-
-    return nr1, winningBoard1
+        for board in boards:
+            if validate(board):
+                winner = int(nr)
+                winning_board = board
+                print("winner", board, "nr", nr)
+                break
+    return winning_board, winner
 
 
-winner, winningBoard = bb()
+lastWinning = None
+lastNr = None
+while (len(boards)):
+    winning, nr = getWinner(boards)
+    lastWinning = winning.copy()
+    lastNr = nr
+    del boards[boards.index(winning)]
+    print(nr)
 
-sumUnmarked = getSumUnmarked(winningBoard)
-print(int(sumUnmarked) * int(winner))
+sumUnmarked = 0
+
+for line in lastWinning:
+    for nr in line:
+        if nr is not None:
+            sumUnmarked += int(nr)
+print(sumUnmarked * lastNr)
