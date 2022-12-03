@@ -1,9 +1,8 @@
 import math
 
-# Open a file: file
-from collections import defaultdict
-
 from numpy import sort
+
+# Open a file: file
 
 file = open('input.txt', mode='r')
 

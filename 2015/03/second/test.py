@@ -1,4 +1,3 @@
-import math
 import collections
 
 # Open a file: file

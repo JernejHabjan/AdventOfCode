@@ -1,5 +1,3 @@
-import math
-
 # Open a file: file
 file = open('input.txt', mode='r')
 
