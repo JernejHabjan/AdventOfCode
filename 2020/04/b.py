@@ -39,7 +39,7 @@ def is_valid(key, val) -> bool:
         val1 = int(val)
         return 2020 <= val1 <= 2030
     elif key == "hgt":
-        if len(val)< 4:
+        if len(val) < 4:
             return False
         val1 = val[:-2]
         if not val1.isnumeric():

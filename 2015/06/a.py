@@ -1,6 +1,4 @@
-file = open('input.txt', mode='r')
-lines = file.read().splitlines()
-file.close()
+with open('input.txt', "r") as f: lines = f.read().splitlines()
 
 arr_size_y = 1000
 arr_size_x = 1000

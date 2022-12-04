@@ -1,9 +1,9 @@
 file = open('input.txt', mode='r')
-all_of_it = file.read().splitlines()[0]
+line = file.read().splitlines()[0]
 file.close()
 
 current_floor = 0
-for step, char in enumerate(all_of_it):
+for step, char in enumerate(line):
     if char == "(":
         current_floor += 1
     if char == ")":

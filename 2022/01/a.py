@@ -1,8 +1,6 @@
-file = open('input.txt', mode='r')
-lines = file.read().splitlines()
-file.close()
+with open('input.txt', "r") as f: lines = f.read().splitlines()
 
-# print(lines)
+
 sums = []
 currentSum = 0
 for line in lines:

@@ -1,6 +1,4 @@
-file = open('input.txt', mode='r')
-lines = file.read().splitlines()
-file.close()
+with open('input.txt', "r") as f: lines = f.read().splitlines()
 
 sums = []
 currentSum = 0
@@ -11,4 +9,4 @@ for line in lines:
     else:
         currentSum += int(line)
 sums.sort()
-print(sums[len(sums)-1] + sums[len(sums)-2] + sums[len(sums)-3])
+print(sums[len(sums) - 1] + sums[len(sums) - 2] + sums[len(sums) - 3])
