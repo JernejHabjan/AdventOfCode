@@ -1,12 +1,9 @@
-# Open a file: file
 file = open('input.txt', mode='r')
-
-# read all lines at once
 lines = file.read().splitlines()
-
-# close the file
 file.close()
+
 dict1 = dict()
+
 
 def handle_overflow(var_name):
     # todo
@@ -14,16 +11,17 @@ def handle_overflow(var_name):
     # trimmed = binary[-16:]
     # print(binary,trimmed, int("0b" + trimmed, 2))
     # dict1[var_name] = int("0b" + trimmed, 2)
-    if dict1[var_name] <0:
-        print("This is probably not correct "+var_name + " " + str(dict1[var_name]) )
+    if dict1[var_name] < 0:
+        print("This is probably not correct " + var_name + " " + str(dict1[var_name]))
     pass
+
+
 for line in lines:
     left_side, var_name = line.split(" -> ")
 
     # assignment
     if left_side.isnumeric():
         dict1[var_name] = int(left_side)
-
 
     if "AND" in left_side:
         from_var_name, to_var_name = left_side.split(" AND ")

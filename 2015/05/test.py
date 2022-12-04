@@ -1,12 +1,8 @@
-# Open a file: file
 file = open('input.txt', mode='r')
-
-# read all lines at once
 lines = file.read().splitlines()
-
-# close the file
 file.close()
-all = 0
+
+total = 0
 for line in lines:
 
     vowels = line.count("a") + line.count("e") + line.count("i") + line.count("o") + line.count("u")
@@ -36,6 +32,5 @@ for line in lines:
     if not contains_double_letter:
         continue
 
-
-    all += 1
-print(all)
+    total += 1
+print(total)

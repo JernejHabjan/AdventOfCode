@@ -1,10 +1,5 @@
-# Open a file: file
 file = open('input.txt', mode='r')
-
-# read all lines at once
 all_of_it = file.read()
-
-# close the file
 file.close()
 
 numCorrectPasswords = 0

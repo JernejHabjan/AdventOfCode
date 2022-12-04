@@ -1,10 +1,5 @@
-# Open a file: file
 file = open('input.txt', mode='r')
-
-# read all lines at once
 lines = file.read().splitlines()
-
-# close the file
 file.close()
 
 
@@ -17,7 +12,7 @@ def getMostAndLeastCommonBitsOfIndex(i, arr):
             bits1 += 1
         else:
             bits0 += 1
-    return (bits1, bits0)
+    return bits1, bits0
 
 
 # most1, least1 = getMostAndLeastCommonBitsOfIndex()

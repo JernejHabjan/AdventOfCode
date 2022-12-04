@@ -1,10 +1,5 @@
-# Open a file: file
 file = open('input.txt', mode='r')
-
-# read all lines at once
 all_of_it = file.read()
-
-# close the file
 file.close()
 
 numCorrectPasswords = 0
@@ -25,15 +20,14 @@ for line in split_by_line:
 
     print(num_min, num_max, character, password)
 
-    index_min = num_min-1
-    index_max = num_max-1
+    index_min = num_min - 1
+    index_max = num_max - 1
     print(password[index_min], password[index_max])
 
     min_contains_char = password[index_min] == character
     max_contains_char = password[index_max] == character
 
     if min_contains_char != max_contains_char:
-        numCorrectPasswords +=1
-
+        numCorrectPasswords += 1
 
 print(numCorrectPasswords)

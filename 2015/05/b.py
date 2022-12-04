@@ -1,12 +1,8 @@
-# Open a file: file
 file = open('input.txt', mode='r')
-
-# read all lines at once
 lines = file.read().splitlines()
-
-# close the file
 file.close()
-all = 0
+
+total = 0
 for line in lines:
 
     prev_prev_chr = None
@@ -25,5 +21,5 @@ for line in lines:
         prev_prev_chr = prev_chr
         prev_chr = chr
 
-    all += 1
-print(all)
+    total += 1
+print(total)

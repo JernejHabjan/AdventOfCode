@@ -1,12 +1,7 @@
-# Open a file: file
 import collections
 
 file = open('input.txt', mode='r')
-
-# read all lines at once
 all_of_it = file.read().split("\n\n")
-
-# close the file
 file.close()
 
 

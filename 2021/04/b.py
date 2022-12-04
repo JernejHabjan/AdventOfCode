@@ -1,10 +1,5 @@
-# Open a file: file
 file = open('input.txt', mode='r')
-
-# read all lines at once
 lines = file.read().splitlines()
-
-# close the file
 file.close()
 
 nrInput = lines[0].split(",")
@@ -61,7 +56,7 @@ def getWinner(allBoards):
 
 lastWinning = None
 lastNr = None
-while (len(boards)):
+while len(boards):
     winning, nr = getWinner(boards)
     lastWinning = winning.copy()
     lastNr = nr
