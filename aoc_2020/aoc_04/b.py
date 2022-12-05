@@ -1,11 +1,4 @@
-import collections
-
-file = open('input.txt', mode='r')
-all_of_it = file.read().split("\n\n")
-file.close()
-
-
-def is_valid(key, val) -> bool:
+def _is_valid(key, val) -> bool:
     # byr (Birth Year) - four digits; at least 1920 and at most 2002.
     # iyr (Issue Year) - four digits; at least 2010 and at most 2020.
     # eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
@@ -72,20 +65,29 @@ def is_valid(key, val) -> bool:
         return True
 
 
-num_correct_passport = 0
-for passport in all_of_it:
-    another_split = passport.split("\n")
-    items = dict()
-    for e in another_split:
-        itemsList = e.split(" ")
-        for item in itemsList:
-            key, val = item.split(":")
-            if is_valid(key, val):
-                items[key] = val
-    print(collections.OrderedDict(sorted(items.items())).keys())
+def aoc_2020_04_b():
+    import pathlib
+    with open(str(pathlib.Path(__file__).parent.resolve()) + '\\input.txt', "r") as f:
+        lines = f.read().split("\n\n")
 
-    if len(items) == 8:
-        num_correct_passport += 1
-    if len(items) == 7 and "cid" not in items:
-        num_correct_passport += 1
-print(num_correct_passport)
+    num_correct_passport = 0
+    for passport in lines:
+        another_split = passport.split("\n")
+        items = dict()
+        for e in another_split:
+            itemsList = e.split(" ")
+            for item in itemsList:
+                key, val = item.split(":")
+                if _is_valid(key, val):
+                    items[key] = val
+        # print(collections.OrderedDict(sorted(items.items())).keys())
+
+        if len(items) == 8:
+            num_correct_passport += 1
+        if len(items) == 7 and "cid" not in items:
+            num_correct_passport += 1
+    return num_correct_passport
+
+
+if __name__ == '__main__':
+    print(aoc_2020_04_b())

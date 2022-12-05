@@ -1,40 +1,27 @@
-with open('input.txt', "r") as f: lines = f.read().splitlines()
-
-nrInput = lines[0].split(",")
-boards = []
-for i in range(1, len(lines)):
-    line = lines[i]
-    if line == "":
-        boards.append([])
-        continue
-    line = line.lstrip().replace("  ", " ")
-    boards[len(boards) - 1].append(line.split(" "))
-
-
-def allNonesInVec(arr):
+def _all_nones_in_vec(arr):
     for r in arr:
         if r is not None:
             return False
     return True
 
 
-def validate(board):
+def _validate(board):
     for currColumnIndex in range(0, len(board)):
-        colVec = []
+        col_vec = []
         for currentRowIndex in range(0, len(board[currColumnIndex])):
-            colVec.append(board[currentRowIndex][currColumnIndex])
-            if allNonesInVec(board[currColumnIndex]):
+            col_vec.append(board[currentRowIndex][currColumnIndex])
+            if _all_nones_in_vec(board[currColumnIndex]):
                 return True
-        if allNonesInVec(colVec):
+        if _all_nones_in_vec(col_vec):
             return True
 
     return False
 
 
-def getWinner(allBoards):
+def _get_winner(boards, nr_input):
     winner = 0
     winning_board = None
-    for nr in nrInput:
+    for nr in nr_input:
         # print("next nr", nr)
         if winner != 0:
             break
@@ -44,27 +31,46 @@ def getWinner(allBoards):
                     if boards[i][j][k] == nr:
                         boards[i][j][k] = None
         for board in boards:
-            if validate(board):
+            if _validate(board):
                 winner = int(nr)
                 winning_board = board
-                print("winner", board, "nr", nr)
+                # print("winner", board, "nr", nr)
                 break
     return winning_board, winner
 
 
-lastWinning = None
-lastNr = None
-while len(boards):
-    winning, nr = getWinner(boards)
-    lastWinning = winning.copy()
-    lastNr = nr
-    del boards[boards.index(winning)]
-    print(nr)
+def aoc_2021_04_b():
+    import pathlib
+    with open(str(pathlib.Path(__file__).parent.resolve()) + '\\input.txt', "r") as f:
+        lines = f.read().splitlines()
 
-sumUnmarked = 0
+    nr_input = lines[0].split(",")
+    boards = []
+    for i in range(1, len(lines)):
+        line = lines[i]
+        if line == "":
+            boards.append([])
+            continue
+        line = line.lstrip().replace("  ", " ")
+        boards[len(boards) - 1].append(line.split(" "))
 
-for line in lastWinning:
-    for nr in line:
-        if nr is not None:
-            sumUnmarked += int(nr)
-print(sumUnmarked * lastNr)
+    last_winning = None
+    last_nr = None
+    while len(boards):
+        winning, nr = _get_winner(boards, nr_input)
+        last_winning = winning.copy()
+        last_nr = nr
+        del boards[boards.index(winning)]
+        # print(nr)
+
+    sumUnmarked = 0
+
+    for line in last_winning:
+        for nr in line:
+            if nr is not None:
+                sumUnmarked += int(nr)
+    return sumUnmarked * last_nr
+
+
+if __name__ == '__main__':
+    print(aoc_2021_04_b())

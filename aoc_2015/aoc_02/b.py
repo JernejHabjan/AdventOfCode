@@ -1,29 +1,29 @@
-# Open a file: file
-file = open('input.txt', mode='r')
+def aoc_2015_02_b():
+    import pathlib
+    with open(str(pathlib.Path(__file__).parent.resolve()) + '\\input.txt', "r") as f:
+        lines = f.read().splitlines()
+    total = 0
+    for line in lines:
+        l, w, h = line.split("x")
+        l, w, h = int(l), int(w), int(h)
+        # one = l * w
+        # two = w * h
+        # three = h * l
 
-# read all lines at once
-lines = file.read().splitlines()
+        # print(l,w,h)
+        # print(one, two ,three)
 
-# close the file
-file.close()
-total = 0
-for line in lines:
-    l, w, h = line.split("x")
-    l, w, h = int(l), int(w), int(h)
-    one = l * w
-    two = w * h
-    three = h * l
+        a, b, c = 2 * (h + l), 2 * (l + w), 2 * (h + w)
 
-    # print(l,w,h)
-    # print(one, two ,three)
+        obseg = min(a, b, c)
+        bow = w * h * l
+        # print(obseg)
+        total += obseg + bow
 
-    a, b, c = 2 * (h + l), 2 * (l + w), 2 * (h + w)
+        # total += one+two + three + min(one, two, three)/2
 
-    obseg = min(a, b, c)
-    bow = w * h * l
-    print(obseg)
-    total += obseg + bow
+    return total
 
-    # total += one+two + three + min(one, two, three)/2
 
-print(total)
+if __name__ == '__main__':
+    print(aoc_2015_02_b())
