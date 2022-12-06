@@ -1,5 +1,5 @@
 from collections import deque
-from a import extract_crates_and_instructions
+import aoc_2022.aoc_05.a as aoc_05_a
 
 
 def move_crates_multiple_at_a_time(instruction: tuple[int, int, int], stacks: list[deque]):
@@ -21,7 +21,7 @@ def aoc_2022_05_b():
     with open(str(pathlib.Path(__file__).parent.resolve()) + '\\input.txt', "r") as f:
         lines = f.read().splitlines()
 
-    (stacks, instructions) = extract_crates_and_instructions(lines)
+    (stacks, instructions) = aoc_05_a.extract_crates_and_instructions(lines)
 
     for instruction in instructions:
         move_crates_multiple_at_a_time(instruction, stacks)

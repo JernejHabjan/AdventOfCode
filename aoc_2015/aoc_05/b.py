@@ -1,3 +1,4 @@
+# todo not finished yet
 def aoc_2015_05_b():
     import pathlib
     with open(str(pathlib.Path(__file__).parent.resolve()) + '\\input.txt', "r") as f:

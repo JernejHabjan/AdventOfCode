@@ -1,8 +1,8 @@
-from a import get_marker
+import aoc_2022.aoc_06.a as aoc_06_a
 
 
 def aoc_2022_06_b():
-    return get_marker(14)
+    return aoc_06_a.get_marker(14)
 
 
 if __name__ == '__main__':
