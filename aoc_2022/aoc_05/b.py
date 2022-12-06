@@ -1,5 +1,5 @@
 from collections import deque
-from .a import extract_crates_and_instructions
+from a import extract_crates_and_instructions
 
 
 def move_crates_multiple_at_a_time(instruction: tuple[int, int, int], stacks: list[deque]):
