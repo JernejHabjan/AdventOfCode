@@ -1,4 +1,6 @@
-# todo not finished yet
+import re
+
+
 def aoc_2015_05_b():
     import pathlib
     with open(str(pathlib.Path(__file__).parent.resolve()) + '\\input.txt', "r") as f:
@@ -9,22 +11,26 @@ def aoc_2015_05_b():
 
         prev_prev_chr = None
         prev_chr = None
-        two_pairs = []
-        for chr in line:
+        has_char_between = False
+        contains_multiple_pairs = False
+        for character in line:
 
-            if prev_prev_chr is not None and prev_chr is not None:
-                if prev_prev_chr == chr:
-                    pass
-                    # print("OK")
+            if prev_chr is not None:
+                # checking for contains_multiple_pairs
+                substring = prev_chr + character
+                if len(re.findall(substring, line)) > 1:
+                    contains_multiple_pairs = True
+                    # print("contains_multiple_pairs")
 
-            # print(prev_prev_chr)
-
-            # TODO weird instructions
-
+                # checking for has_char_between
+                if prev_prev_chr is not None:
+                    if prev_prev_chr == character:
+                        has_char_between = True
+                        # print("has_char_between")
             prev_prev_chr = prev_chr
-            prev_chr = chr
-
-        total += 1
+            prev_chr = character
+        if has_char_between and contains_multiple_pairs:
+            total += 1
     return total
 
 

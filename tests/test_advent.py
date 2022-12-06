@@ -88,7 +88,7 @@ class TestAdventOfCode2015(unittest.TestCase):
         self.assertEqual(_aoc_2015_05_a.aoc_2015_05_a(), 255)
 
     def test_2015_05_b(self):
-        self.assertEqual(_aoc_2015_05_b.aoc_2015_05_b(), 111)
+        self.assertEqual(_aoc_2015_05_b.aoc_2015_05_b(), 55)
 
     def test_2015_06_a(self):
         self.assertEqual(_aoc_2015_06_a.aoc_2015_06_a(), 569999)

@@ -1,15 +1,8 @@
-def aoc_2015_04_b():
-    import hashlib
+import aoc_2015.aoc_04.a as aoc_04_a
 
-    key = "iwrupvqb"
-    i = 1
-    while True:
-        h = hashlib.md5((key + str(i)).encode('utf-8')).hexdigest()
-        if h[:6] == "000000":
-            res = i
-            break
-        i += 1
-    return res
+
+def aoc_2015_04_b():
+    return aoc_04_a.get_hash(6)
 
 
 if __name__ == '__main__':
