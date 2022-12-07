@@ -12,7 +12,7 @@ def get_directory_sum_size(current_dir: aoc_07_a.Directory, directory_sizes: lis
             total_size += file_and_folder.size
             # print(file_and_folder.size, file_and_folder.name)
 
-    print("returning total size", current_dir.name, total_size)
+    # print("returning total size", current_dir.name, total_size)
     directory_sizes.append(total_size)
     return total_size
 
@@ -26,15 +26,16 @@ def aoc_2022_07_b():
     # debug_print_directory(root_dir, 0)
 
     total_disk_space = 70000000
+    space_required = 30000000
     dir_sizes = []
     space_used = get_directory_sum_size(root_dir, dir_sizes)
-    print("dir sizes", dir_sizes)
     remaining_space = total_disk_space - space_used
-    print("remaining space", remaining_space)
+
+    # print("remaining space", remaining_space, "dir sizes", dir_sizes)
     dir_sizes.sort()
     res = 0
     for size in dir_sizes:
-        if size >= remaining_space:
+        if remaining_space + size >= space_required:
             res = size
             break
     return res

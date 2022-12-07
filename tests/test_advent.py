@@ -221,7 +221,7 @@ class TestAdventOfCode2022(unittest.TestCase):
         self.assertEqual(_aoc_2022_07_a.aoc_2022_07_a(), 1611443)
 
     def test_2022_07_b(self):
-        self.assertEqual(_aoc_2022_07_b.aoc_2022_07_b(), 1)
+        self.assertEqual(_aoc_2022_07_b.aoc_2022_07_b(), 2086088)
 
 
 if __name__ == '__main__':
