@@ -82,7 +82,7 @@ class TestAdventOfCode2015(unittest.TestCase):
         start_time = time.time()
         _aoc_2015_04_b.aoc_2015_04_b()
         time_taken = time.time() - start_time
-        self.assertLessEqual(time_taken, 2, "Takes too long to execute")
+        self.assertLessEqual(time_taken, 10, "Takes too long to execute")
 
     def test_2015_05_a(self):
         self.assertEqual(_aoc_2015_05_a.aoc_2015_05_a(), 255)
