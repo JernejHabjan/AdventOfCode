@@ -24,7 +24,7 @@ def find_max_x_y(tuples):
     return total_max_x + 1, total_max_y + 1
 
 
-def fill_array_vertical_horizontal(array, tuples):
+def fill_array(array, tuples, diagonals: bool) -> None:
     for x1, y1, x2, y2 in tuples:
         if x1 == x2:
             # vertical line
@@ -32,16 +32,16 @@ def fill_array_vertical_horizontal(array, tuples):
             max_y = max(y1, y2)
             for i in range(min_y, max_y + 1):
                 array[i, x1] += 1
-                # print("increased x")
-        if y1 == y2:
+        elif y1 == y2:
             # vertical line
             min_x = min(x1, x2)
             max_x = max(x1, x2)
             for i in range(min_x, max_x + 1):
                 array[y1, i] += 1
-                # print("increased y")
-        # print(array)
-        # print("")
+        else:
+            # diagonal
+            if not diagonals:
+                continue
 
 
 def count_sum(array):
@@ -54,17 +54,20 @@ def count_sum(array):
     return total
 
 
-def aoc_2021_05_a():
+def read_file_and_get_total(diagonals):
     import pathlib
-
     with open(str(pathlib.Path(__file__).parent.resolve()) + '\\input.txt', "r") as f:
         lines = f.read().splitlines()
     tuples = get_tuples(lines)
     max_x, max_y = find_max_x_y(tuples)
     array = np.full((max_x, max_y), 0)
-    fill_array_vertical_horizontal(array, tuples)
+    fill_array(array, tuples, diagonals=diagonals)
     total = count_sum(array)
     return total
+
+
+def aoc_2021_05_a():
+    return read_file_and_get_total(diagonals=False)
 
 
 if __name__ == '__main__':
