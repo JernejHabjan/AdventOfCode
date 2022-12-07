@@ -26,28 +26,21 @@ def debug_print_directory(current_dir: Directory, current_level: int):
             print(indent_children + "- " + file_and_folder.name + " (file, size=" + str(file_and_folder.size) + ")")
 
 
-valid_size = 0
-
-
-def get_directory_sum_size(current_dir: Directory, max_size=100000) -> int:
-    # todo remove this global var
-    global valid_size
+def get_directory_sum_size(current_dir: Directory, valid_sizes: list[int], max_size=100000) -> int:
     total_size = 0
     for file_and_folder in current_dir.files_and_folders:
         if isinstance(file_and_folder, Directory):
-            size = get_directory_sum_size(file_and_folder)
-            print(size, file_and_folder.name)
+            size = get_directory_sum_size(file_and_folder, valid_sizes)
+            # print(size, file_and_folder.name)
             total_size += size
         else:
             total_size += file_and_folder.size
-            print(file_and_folder.size, file_and_folder.name)
-    # if total_size > max_size:
-    #     total_size = 0
+            # print(file_and_folder.size, file_and_folder.name)
 
     print("returning total size", current_dir.name, total_size)
     if total_size <= max_size:
         print("valid size", total_size)
-        valid_size += total_size
+        valid_sizes.append(total_size)
     return total_size
 
 
@@ -81,8 +74,9 @@ def aoc_2022_07_a():
                 current_dir.files_and_folders.append(File(args[1], int(args[0]), current_dir))
     debug_print_directory(root_dir, 0)
 
-    get_directory_sum_size(root_dir)
-    return valid_size
+    valid_sizes = []
+    get_directory_sum_size(root_dir, valid_sizes)
+    return sum(valid_sizes)
 
 
 if __name__ == '__main__':
