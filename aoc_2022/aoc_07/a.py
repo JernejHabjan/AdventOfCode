@@ -26,29 +26,25 @@ def debug_print_directory(current_dir: Directory, current_level: int):
             print(indent_children + "- " + file_and_folder.name + " (file, size=" + str(file_and_folder.size) + ")")
 
 
-def get_directory_sum_size(current_dir: Directory, valid_sizes: list[int], max_size=100000) -> int:
+def get_directory_valid_size(current_dir: Directory, valid_sizes: list[int], max_size=100000) -> int:
     total_size = 0
     for file_and_folder in current_dir.files_and_folders:
         if isinstance(file_and_folder, Directory):
-            size = get_directory_sum_size(file_and_folder, valid_sizes)
+            size = get_directory_valid_size(file_and_folder, valid_sizes)
             # print(size, file_and_folder.name)
             total_size += size
         else:
             total_size += file_and_folder.size
             # print(file_and_folder.size, file_and_folder.name)
 
-    print("returning total size", current_dir.name, total_size)
+    # print("returning total size", current_dir.name, total_size)
     if total_size <= max_size:
-        print("valid size", total_size)
+        # print("valid size", total_size)
         valid_sizes.append(total_size)
     return total_size
 
 
-def aoc_2022_07_a():
-    import pathlib
-    with open(str(pathlib.Path(__file__).parent.resolve()) + '\\input.txt', "r") as f:
-        lines = f.read().splitlines()
-
+def create_dir_tree(lines: list[str]) -> Directory:
     root_dir = Directory("/", None)
     current_dir = root_dir
     for line in lines:
@@ -72,10 +68,19 @@ def aoc_2022_07_a():
                 current_dir.files_and_folders.append(Directory(args[1], current_dir))
             else:
                 current_dir.files_and_folders.append(File(args[1], int(args[0]), current_dir))
-    debug_print_directory(root_dir, 0)
+    return root_dir
+
+
+def aoc_2022_07_a():
+    import pathlib
+    with open(str(pathlib.Path(__file__).parent.resolve()) + '\\input.txt', "r") as f:
+        lines = f.read().splitlines()
+
+    root_dir = create_dir_tree(lines)
+    # debug_print_directory(root_dir, 0)
 
     valid_sizes = []
-    get_directory_sum_size(root_dir, valid_sizes)
+    get_directory_valid_size(root_dir, valid_sizes)
     return sum(valid_sizes)
 
 
