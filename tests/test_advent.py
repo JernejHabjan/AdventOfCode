@@ -52,6 +52,8 @@ import aoc_2022.aoc_06.a as _aoc_2022_06_a
 import aoc_2022.aoc_06.b as _aoc_2022_06_b
 import aoc_2022.aoc_07.a as _aoc_2022_07_a
 import aoc_2022.aoc_07.b as _aoc_2022_07_b
+import aoc_2022.aoc_08.a as _aoc_2022_08_a
+import aoc_2022.aoc_08.b as _aoc_2022_08_b
 
 
 class TestAdventOfCode2015(unittest.TestCase):
@@ -222,6 +224,12 @@ class TestAdventOfCode2022(unittest.TestCase):
 
     def test_2022_07_b(self):
         self.assertEqual(_aoc_2022_07_b.aoc_2022_07_b(), 2086088)
+
+    def test_2022_08_a(self):
+        self.assertEqual(_aoc_2022_08_a.aoc_2022_08_a(), 259308)
+
+    def test_2022_08_b(self):
+        self.assertEqual(_aoc_2022_08_b.aoc_2022_08_b(), 1)
 
 
 if __name__ == '__main__':
