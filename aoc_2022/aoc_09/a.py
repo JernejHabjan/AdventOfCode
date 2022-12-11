@@ -4,13 +4,16 @@ import math
 class Tail:
     _current_x = 0
     _current_y = 0
-    visited_coordinates: set[tuple[int, int]] = [(_current_x, _current_y)]
+    visited_coordinates: set[tuple[int, int]] = set()
+
+    def __init__(self):
+        self.visited_coordinates.add((self._current_x, self._current_y))
 
     def move_tail_next_to_head(self, head_x, head_y, prev_head_x, prev_head_y, direction):
         dist = math.dist([head_x, head_y], [self._current_x, self._current_y])
-        print("new head_x", head_x, "new head_y", head_y, "_current_x", self._current_x, "_current_y", self._current_y,
-              "DIST:",
-              dist)
+        # print("new head_x", head_x, "new head_y", head_y, "_current_x", self._current_x, "_current_y", self._current_y,
+        #       "DIST:",
+        #       dist)
 
         if dist == 1:
             return
@@ -24,10 +27,10 @@ class Tail:
                 # move diagonally
                 new_x = prev_head_x  # todo
                 new_y = prev_head_y  # todo
-                print("not touching and diff row or col")
+                # print("not touching and diff row or col")
 
             else:
-                print("not touching and same row or col")
+                # print("not touching and same row or col")
                 # same row or column - THIS IS OK
                 if direction == "R":
                     new_x = head_x - 1
@@ -43,13 +46,13 @@ class Tail:
                     new_y = head_y - 1
         else:
             if not same_row_or_col:
-                print("are touching and not same row and col")
+                # print("are touching and not same row and col")
                 # todo move diagonally if lagging behind
                 new_x = self._current_x  # todo
                 new_y = self._current_y  # todo
 
             else:
-                print("are touching and same row and col")
+                # print("are touching and same row and col")
                 new_x = self._current_x  # todo
                 new_y = self._current_y  # todo
 
@@ -110,14 +113,15 @@ def aoc_2022_09_a():
 
     movements: list[tuple[str, int]] = []
     for line in lines:
-        movements.append((line[0], int(line[2])))
+        a, b = line.split()
+        movements.append((a, int(b)))
 
     head = Head()
     for direction, amount in movements:
         head.move_head_multiple_steps(direction, amount)
-        print("#################### Head debug pos", head.get_debug_pos(), "tail debug pos", head.get_debug_pos_tail(),
-              "tail coordinates",
-              head.get_tail_visited_coordinates())
+        # print("#################### Head debug pos", head.get_debug_pos(), "tail debug pos", head.get_debug_pos_tail(),
+        #       "tail coordinates",
+        #       head.get_tail_visited_coordinates())
 
     visited_count = head.get_tail_visited_coordinates_count()
 
